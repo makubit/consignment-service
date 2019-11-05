@@ -9,7 +9,7 @@ import(
 	micro "github.com/micro/go-micro"
 
 	"context"
-	pb "local.libraries/shippy-service"
+	pb "github.com/makubit/shippy-service/proto/consignment"
 	//"google.golang.org/grpc"
 )
 

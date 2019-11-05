@@ -11,7 +11,7 @@ import (
 	"fmt"
 	//"google.golang.org/grpc"
 	//"google.golang.org/grpc/reflection"
-	pb "local.libraries/shippy-service"
+	pb "github.com/makubit/shippy-service/proto/consignment"
 	"github.com/micro/go-micro"
 	"context"
 	//"log"
