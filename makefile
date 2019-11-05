@@ -1,7 +1,7 @@
 build:
 	protoc -I. --go_out=plugins=micro:. \
 	  proto/consignment/consignment.proto
-	GOOS=linux go build
+	#GOOS=linux go build
 	docker build -t consignment-service .
 
 run:
