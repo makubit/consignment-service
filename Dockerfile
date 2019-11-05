@@ -2,6 +2,6 @@ FROM debian:latest
 
 RUN mkdir /app
 WORKDIR /app
-ADD consignment-service /app/consignment-service
+ADD shippy-service /app/shippy-service
 
-CMD ["./consignment-service"]
+CMD ["./shippy-service"]

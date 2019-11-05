@@ -88,7 +88,7 @@ func main() {
 	}
 	 */
 	srv := micro.NewService(
-		micro.Name("consignment.service"),
+		micro.Name("shippy-service.consignment.service"),
 		)
 	srv.Init()
 

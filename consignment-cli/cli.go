@@ -2,20 +2,17 @@ package main
 
 import(
 	"encoding/json"
+	"github.com/micro/go-micro"
 	"io/ioutil"
 	"log"
 	"os"
 
-	micro "github.com/micro/go-micro"
-
 	"context"
 	pb "github.com/makubit/shippy-service/proto/consignment"
-	//"google.golang.org/grpc"
 )
 
 const (
-	address = "localhost:50051"
-	defaultFilename = "consignment-cli/consignment.json"
+	defaultFilename = "consignment.json"
 )
 
 func parseFile(file string) (*pb.Consignment, error) {
@@ -62,10 +59,12 @@ func main() {
 		log.Println(v)
 	}*/
 
-	service := micro.NewService(micro.Name("shippy.consignment.cli"))
+	service := micro.NewService(micro.Name("shippy-service.consignment.cli"))
 	service.Init()
 
-	client := pb.NewShippingServiceClient("consignment.service", service.Client())
+	//cmd.Init()
+
+	client := pb.NewShippingServiceClient("shippy-service.consignment.service", service.Client())
 
 	file := defaultFilename
 	if len(os.Args) > 1 {
