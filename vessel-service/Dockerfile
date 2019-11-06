@@ -1,4 +1,4 @@
-FROM golang:apline as builder
+FROM golang:alpine as builder
 
 RUN apk --no-cache add git
 
@@ -6,8 +6,8 @@ WORKDIR /app/vessel-service
 
 COPY . .
 
-RUN go mod downlonad
-RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffinx cgo -o shippy-service-vessel
+RUN go mod download
+RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o shippy-service-vessel
 
 FROM alpine:latest
 

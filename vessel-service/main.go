@@ -9,15 +9,15 @@ import (
 	"github.com/micro/go-micro"
 )
 
-type Repository interface {
-	FindAvailable(*pb.Specification) (*pb.Vessel, error)
+type repository interface {
+	FindAvalilable(*pb.Specification) (*pb.Vessel, error)
 }
 
 type VesselRepository struct {
 	vessels []*pb.Vessel
 }
 
-func (repo *VesselRepository) FindAvailable(spec *pb.Specification) (*pb.Vessel, error) {
+func (repo *VesselRepository) FindAvalilable(spec *pb.Specification) (*pb.Vessel, error) {
 	for _, vessel := range repo.vessels {
 		if spec.Capacity <= vessel.Capacity && spec.MaxWeight <= vessel.MaxWeight {
 			return vessel, nil
@@ -30,8 +30,8 @@ type service struct {
 	repo repository
 }
 
-func (s *service) FindAvailable(ctx context.Context, req *pb.Specification, res *pb.Response) (error) {
-	vessel, err := s.repo.FindAvailable(req)
+func (s *service) FindAvalilable(ctx context.Context, req *pb.Specification, res *pb.Response) (error) {
+	vessel, err := s.repo.FindAvalilable(req)
 	if err != nil {
 		return err
 	}
@@ -42,12 +42,13 @@ func (s *service) FindAvailable(ctx context.Context, req *pb.Specification, res 
 
 func main() {
 	vessels := []*pb.Vessel {
-		&pb.Vessel{Id: "vessel001", Name: "Boaty", MaxWeight: 200000, Capacity: 500},
+		{Id: "vessel001", Name: "Boaty", MaxWeight: 200000, Capacity: 500},
 	}
+
 	repo := &VesselRepository{vessels}
 
 	srv := micro.NewService(
-		micro.Name("vessel.service"),
+		micro.Name("shippy-service.vessel.service"),
 	)
 
 	srv.Init()
