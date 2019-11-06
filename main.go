@@ -1,20 +1,11 @@
 package main
 
 import (
-	/*"context"
-	"log"
-	"net"
-	"sync"
-	pb "local.libraries/shippy-service"
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/reflection"*/
 	"fmt"
 	"context"
 	"github.com/go-acme/lego/log"
 	"sync"
 
-	//"google.golang.org/grpc"
-	//"google.golang.org/grpc/reflection"
 	pb "github.com/makubit/shippy-service/proto/consignment"
 	vesselProto "github.com/makubit/shippy-service/vessel-service/proto/vessel"
 	"github.com/micro/go-micro"
@@ -49,15 +40,6 @@ type service struct {
 }
 
 func (s *service) CreateConsignment(ctx context.Context, req *pb.Consignment, res *pb.Response) (error) {
-	/*consignment, err := s.repo.Create(req)
-	if err != nil {
-		return err
-	}
-
-	//return &pb.Response{Created: true, Consignment: consignment}, nil
-	res.Created = true
-	res.Consignment = consignment
-	return nil*/
 	vesselResponse, err := s.vesselClient.FindAvalilable(context.Background(), &vesselProto.Specification{
 		MaxWeight: req.Weight,
 		Capacity: int32(len(req.Containers)),
@@ -81,7 +63,6 @@ func (s *service) CreateConsignment(ctx context.Context, req *pb.Consignment, re
 
 func (s *service) GetConsignments(ctx context.Context, req *pb.GetRequest, res *pb.Response) (error) {
 	consignments := s.repo.GetAll()
-	//return &pb.Response{Created: true, Consignments: consignments}, nil
 	res.Consignments = consignments
 	return nil
 }

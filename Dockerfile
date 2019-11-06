@@ -1,11 +1,3 @@
-#FROM debian:latest
-
-#RUN mkdir /app
-#WORKDIR /app
-#ADD shippy-service /app/shippy-service
-
-#CMD ["./shippy-service"]
-
 FROM golang:alpine as builder
 
 RUN apk --no-cache add git
